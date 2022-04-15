@@ -1,0 +1,1272 @@
+html{
+    font-size: 16px;
+    --standardBorder: 2px solid black;
+    --standardLightBorder: 2px solid white;
+    --thinBorder: 1px solid rgba(200, 200, 200, 0.3); 
+    --standardLightTextColor: white;
+    --standardDarkTextColor: black;
+    --standardDarkBackground: #111111;
+    --standardMiddleDarkBackground: #222222;
+    --standardLightDarkBackground: #333333;
+    --standardLightBackground: white;
+}
+
+*{
+    transition: background 0.5s; /*Exprerimental. May cause performance issues*/
+    box-sizing: border-box;
+}
+
+body{
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    /*transition: 0.3s;*/
+}
+
+header{
+    width: 100vw;
+    display: flex;
+    justify-content: space-around;
+    border: var(--standardBorder);
+}
+
+header.narrow{
+
+}
+
+#layout{
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+/*---Navigation---*/
+#navigation{
+    width: 90vw;
+    height: 5rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#navigation > :first-child{
+    border-left: var(--standardBorder);
+}
+
+#navigation .cakeStoreTitle{
+    text-decoration: underline;
+}
+
+#navigation.narrow{
+    background: white;/*pink*/;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: fixed;
+    transition: 0.5s;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#navigation.narrow.hidden{
+    width: 0;
+    transform: translateX(-100%);
+}
+
+#navigation.narrow.hidden .navigationItem{
+    display: none;
+}
+
+.navigationItem{
+    border-right: var(--standardBorder);
+    text-align: center;
+    flex-grow: 0.25;
+}
+
+.navigationItem.active{
+    color: pink;
+    text-decoration: underline;
+    text-decoration-color: pink;
+}
+
+.navigationItem:not(.active){
+    color: black;
+    text-decoration: none;
+}
+
+.navigationToggle{
+    width: 2rem;
+    height: 2rem;
+    top: 0;
+    left: 0;
+    border: var(--standardBorder);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    z-index: 1;
+}
+
+.navigationToggle span{
+    width: 100%;
+    height: 3px;
+    margin-bottom: 2px;
+    border-radius: 2px;
+    background: var(--standardMiddleDarkBackground);
+    transition: 0.5s;
+    transform-origin: center center;
+    display: block;
+}
+
+.navigationToggle.dark span{
+    background: var(--standardLightBackground);
+}
+
+.navigationToggle.on .topLine{
+    width: 141%; /*side * sqrt(2)*/
+    transform: rotate(45deg);
+    position: absolute;
+}
+
+.navigationToggle.on .middleLine{
+    opacity: 0;
+}
+
+.navigationToggle.on .bottomLine{
+    width: 141%; /*side * sqrt(2)*/
+    transform: rotate(-45deg);
+    position: absolute;
+}
+
+.navigationToggle.hidden{
+    display: none;
+}
+
+.navigationItem.narrow {
+    border: none;
+    border-bottom: var(--standardBorder);
+}
+
+.navigationItem.narrow.active{
+    border-color: var(--standardLightTextColor);
+}
+
+/*---------------*/
+.cakeStoreTitle{
+    text-align: center;
+    transition: 0s;
+}
+
+.cakeStoreTitle:hover{
+    color: orange;
+}
+
+/*---Theme_switch---*/
+#themeSwitch{
+    width: 3rem;
+    height: 1.5rem;
+    margin-left: 2rem;
+    border: var(--standardBorder);
+    border-radius: 1rem;
+    position: relative;
+    align-self: center;
+    /*justify-content: center;
+    display: flex;
+    align-items: center;*/
+}
+
+#themeSwitchSlider{
+    width: calc(1.5rem - 2px);
+    height: calc(1.5rem - 2px);
+    background: var(--standardDarkBackground);
+    border-radius: 50%;
+    transition: 0.5s;
+}
+
+#themeSwitchSlider{
+    margin-left: 0%;
+}
+
+/*------------------*/
+
+/*---Home_page---*/
+#homePage{
+    width: 80%;
+    min-height: 90vh; /*To keep footer down*/
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#homePageTextAndSideImage{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#welcomeText{
+    text-align: center;
+    flex-basis: 100%;
+}
+
+#welcomeText > .textHighlight{
+    color: orange;
+}
+
+#homePageText{
+    width: 50%;
+    min-width: 300px;
+}
+
+#homePageText .middleFont{
+    font-size: 3.2rem;
+}
+
+#homePageText .bigFont{
+    color: pink;
+    font-size: 5rem;
+}
+
+#homePageText .simpleText{
+    word-break: break-all;
+}
+
+#homePageSideImageWrapper{
+    width: 40%;
+    flex-grow: 1;
+}
+
+#homePageSideImage{
+    width: 100%;
+}
+/*--------------*/
+
+/*---Search---*/
+#search{
+    width: 80%;
+    height: 7em;
+    min-height: auto;
+    margin-top: 2.5rem;
+    background: rgba(255, 240, 230);
+    border-left: 1rem solid rgba(255, 165, 165);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#searchTitle{
+    font-size: 2rem;
+    color: var(--standardLightTextColor);
+    font-family: monospace;
+}
+
+#searchForm{
+    /*border: var(--standardBorder);*/
+    min-width: 200px;
+    height: 90%;
+    border: var(--thinBorder);
+    border-width: 2px;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+#searchFieldsWrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#searchFieldsWrapper > *{
+    margin: 1px;
+}
+
+#searchTypeSwitch{
+    width: 100%;
+    display: flex;
+    text-align: center;
+}
+
+#searchTypeSwitch > .active{
+    color: var(--standardLightTextColor);
+    background: black;
+}
+
+#searchTypeSwitch > .disabled{
+    color: var(--standardDarkTextColor);
+    background: pink;
+}
+
+#searchTypeSwitch > div{
+    width: 20px;
+    flex-grow: 1;
+}
+
+#textSearch{
+
+}
+
+#textSearch.hidden{
+    
+}
+
+
+
+/*------------*/
+
+
+/*---Store---*/
+#store{
+    width: 80%;
+    margin-top: 2.5rem;
+}
+
+#storeCakeOpeners{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cakeOpener, .cakeInCart{
+    width: 24%;
+    height: 25vw;
+    min-width: 250px;
+    min-height: 320px;
+    /*min-height: 320px;*/
+    border: var(--thinBorder)/*var(--standardBorder)*/;
+    /*display: fex;*/
+    /*align-items: center;
+    flex-direction: column;*/
+    text-align: center;
+}
+
+.cakeOpener .cakeImage, .cakeInCart .cakeImage{
+    width: 70%;
+    height: 50% /*or auto*/;
+    border: var(--standardBorder);
+    border-color: pink;
+    border-radius: 0.5rem;
+}
+
+.cakeOpenerLink{
+    color: black;
+    text-decoration: none;
+}
+
+.cakeEditButton{
+    width: 4rem;
+    height: max-content;
+    background: rgb(92, 64, 51)/*var(--standardDarkBackground)*/;
+    color: var(--standardLightTextColor);
+    border-radius: 0.2rem;
+}
+
+.amountSelect{
+    width: max-content;
+
+}
+
+.amountSelect > button{
+    width: 1.5rem;
+    color: white;
+    background: var(--standardDarkBackground);
+}
+
+.amountSelect > button:first-child{
+    border-top-left-radius: 100%;
+    border-bottom-left-radius: 100%;
+}
+
+.amountSelect > button:last-child{
+    border-top-right-radius: 100%;
+    border-bottom-right-radius: 100%;
+}
+
+.amountSelect > .amount{
+    width: 20px;
+    min-width: max-content;
+}
+
+.addToCartButton{
+    width: 5rem;
+    height: 2rem;
+    color: var(--standardLightTextColor);
+    background: var(--standardDarkBackground);
+    border-radius: 0.5rem;
+}
+
+#openCakeEditor{
+    width: 3rem;
+    height: 3rem;
+    left: 100%;
+    bottom: 5vh;
+    background: rgba(16, 124, 65, 0.9);
+    border-radius: 50%;
+    position: sticky;
+    transition: 0s;
+}
+
+#openCakeEditor:hover{
+    background: rgba(24, 92, 55, 0.8);
+    border-top: var(--standardBorder);
+    border-right: var(--standardBorder);
+}
+
+/*---------------*/
+
+/*---Cake_editor---*/
+#cakeEditor{
+    width: 100vw;
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+}
+
+.cakeTitleInput{
+    width: 15rem;
+    height: 2rem;
+    font-size: 1rem;
+}
+
+.cakeDescriptionTextArea{
+
+}
+
+#cakeImageForm{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#cakeImageForm > .cakeImageInput{
+}
+
+#cakeImageInput{
+
+}
+
+#cakeImagePreview{
+    justify-self: center;
+}
+
+.ingredientsEditor{
+    margin-bottom: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ingredientForm{
+    margin: 0.1rem;
+}
+
+.receiptEditor{
+
+}
+
+.receiptStepForm{
+    background-color: purple;
+}
+
+.receiptStepForm > textarea{
+    width: 100%;
+}
+
+.addOrRemoveForm{
+    flex-basis: 100%;
+}
+/*-----------------*/
+
+/*---Cake---*/
+.cake{
+    border-top: var(--standardBorder);
+    border-bottom: var(--standardBorder);
+}
+
+.cakeImageAndDescription{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cakeDescriptionWindow{
+    flex-grow: 1;
+}
+
+.cakeDescriptionWindow > .cakeTitle{
+    font-size: 2rem;
+    color: orange;
+}
+
+.cakeDescriptionWindow > .cakeDescription{
+    font-size: 1.2rem;
+}
+
+.cakeDescriptionWindow > .cakePrice{
+    
+}
+
+.cake .cakeImage{
+    width: 50%;
+    height: auto;
+    min-width: 300px;
+    border: var(--standardBorder);
+    border-color: pink;
+    border-radius: 0.5rem;
+}
+
+.cakeIngredients{
+
+}
+
+.cakeIngredientsTitle{
+    font-size: 2rem;
+}
+
+.cakeIngredient{
+    margin-bottom: 0.5rem;
+}
+
+.cakeReceipt{
+
+}
+
+.cakeReceiptTitle{
+    font-size: 2rem;
+}
+
+.receiptStep{
+
+}
+
+.cakeReceiptStep > .receiptStepOrderNumber{
+    font-weight: 900;
+}
+
+
+#errorWindow{
+    width: 100vw;
+    height: 100vh;
+    color: var(--standardLightTextColor);
+    background: rgba(10, 10, 10, 0.4);
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#errorWindow.hidden{
+    display: none;
+}
+
+/*----------*/
+
+/*---Cart---*/
+#cart{
+    width: 80%;
+    height: max-content;
+    min-height: 90vh; /*To keep footer down*/
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    border: var(--standardBorder);
+}
+
+.removeFromCartButton{
+
+    margin-left: 100%;
+    transform: translateX(-100%);
+}
+
+.cakeInCart .amountSelect{
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+#checkoutButtonAndTotalPrice{
+    height: max-content;
+    position: absolute;
+    margin-top: 20px;
+    bottom: 0;
+    right: 0;
+    border-top: var(--standardBorder);
+    border-left: var(--standardBorder);
+}
+
+#checkoutButton{
+    color: var(--standardLightTextColor);
+    background-color: var(--standardDarkBackground);
+    font-weight: bold;
+}
+
+#totalPrice{
+
+}
+/*----------*/
+
+/*---User---*/
+#userProfile{
+    width: 80%;
+    min-height: 90vh; /*To keep footer down*/
+}
+
+#profileThemeImageAndUserInfoWrapper{
+    border: var(--thinBorder);
+}
+
+#profileThemeImage{
+    width: 100%;
+    height: 300px;
+    background-position: center;
+    display: flex;
+    justify-content: end;
+    align-items: top;
+}
+
+#profileThemeInputLabel{
+
+}
+
+#profileThemeInput{
+    display: none;
+}
+
+#logoutButton{
+
+}
+
+#cancelProfileChangesButton{
+
+}
+
+#logoutButton{
+
+}
+
+#userInfo{
+    min-width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+#userTextInfo{
+
+}
+
+#profileImageWrapper{
+    width: 12rem;
+    height: 12rem;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#profileImage{
+    width: 12rem;
+    height: 12rem;
+    border: 0.5rem solid white;
+    border-radius: 50%;
+    /*transform: translateY(-40%);*/
+}
+
+#editUserProfileImageLabel{
+    width: 2rem;
+    height: 2rem;
+    color: var(--standardLightTextColor);
+    background: var(--standardDarkBackground);
+    border-radius: 50%;
+    position: absolute;
+}
+
+#userNickNameChangeInput{
+    display: inline-block;
+}
+
+#editUserProfileImageLabel > input{
+    display: none;
+}
+
+#loginAndPasswordEditor{
+
+}
+
+#loginAndPasswordEditor > b{
+    flex-basis: 100%;
+}
+
+#loginAndPasswordEditor > b:hover{
+    color: orange;
+}
+
+
+#whatsNewWindow{
+
+}
+/*---Auth_form*/
+#authFormWrapper{
+    min-height: 90vh; /*To keep footer down*/
+    display: flex;
+    align-items: center;
+}
+
+#authForm{
+    width: 320px;
+    height: 320px;
+    min-width: 300px;
+    min-height: 300px;
+    border: var(--standardBorder);
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+#authFormNavigation{
+    height: 10%;
+    display: flex;
+}
+
+#authFormNavigation > *{
+    width: 50%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#authFormNavigation > .active{
+    background-color: var(--standardDarkBackground);
+}
+
+#authFormNavigation > :not(.active){
+    background-color: pink; /*Maybe*/
+}
+
+#authFormNavigation > :not(.active):hover{
+    background: rgb(255, 84, 167);
+}
+
+#login, #register{
+    height: 90%;
+    position: relative;
+    /*display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;*/
+}
+
+#login > .inputsWrapper, #register > .inputsWrapper{
+    transform: translateY(50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#login > .inputsWrapper > input, #register > .inputsWrapper > input{
+    width: 80%;
+    height: 2rem;
+    margin: 0.1rem;
+    border-radius: 0.2rem;
+}
+
+#login > .inputsWrapper > input:hover, #register > .inputsWrapper > input:hover{
+    background: rgba(10, 10, 10, 0.1);
+}
+
+#login > button, #register > button{
+    width: 4.5rem;
+    height: 2rem;
+    color: white;
+    background: var(--standardDarkBackground);
+    top: 95%;
+    left: 95%;
+    transform: translate(-100%, -100%);
+    position: absolute;
+}
+
+#login > button:hover, #register > button:hover{
+    color: pink;
+    text-decoration: underline;
+}
+
+/*------------*/
+
+/*---Footer---*/
+footer{
+    width: 100vw;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    border-top: var(--standardBorder);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+footer > div{
+    /*border-left: var(--standardBorder);
+    border-right: var(--standardBorder);*/
+    min-width: 160px;
+    margin: 1rem;
+    border-top: var(--standardBorder);
+
+}
+
+footer b {
+    margin-bottom: 0.3rem;
+    font-size: 1rem;
+}
+
+#footerCopyrightAndSocialMedia, #footerProducts, #company, #footerTeamNames, #network{
+    display: flex;
+    flex-direction: column;
+}
+
+#footerCopyrightAndSocialMedia{
+    min-width: 320px;
+    margin-top: 1rem;
+    flex-basis: 30%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#footerSocialMedia{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+#copyright{
+    font-size: 1rem;
+    text-align: center;
+    justify-self: left;
+}
+
+#footerTeamNames{
+    display: flex;
+    flex-direction: column;
+}
+
+#footerSocialMedia > a, #footerTeamNames > span, #footerProducts > span, #company > span, #network > span{
+     margin-bottom: 0.2rem;
+    font-size: 0.8rem;
+} 
+
+#footerSocialMedia > a:hover, #footerTeamNames > span:hover, #footerProducts > span:hover, #company > span:hover, #network > span:hover{
+    color: orange;
+}
+/*------------*/
+
+/*---Common_standard_styles*/
+.standardButton{
+    height: max-content;
+    color: var(--standardLightBackground);
+    background: var(--standardDarkBackground);
+    border-radius: 0.3rem;
+}
+
+.imageSelectInput{
+    width: 2rem;
+    height: 2rem;
+    color: var(--standardLightTextColor);
+    background-color: var(--standardDarkBackground);
+    border-radius: 50%;
+    font-size: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imageSelectInput > .icon{
+    display: block;
+    transform: rotate(125deg);
+}
+
+.imageSelectInput input{
+    display: none;
+}
+/*-------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+/*************************Dark theme****************************************/
+body.dark{
+    background: var(--standardDarkBackground);
+}
+
+#layout.dark{
+    /*background: var(--standardDarkBackground);*/
+}
+
+/*---Header---*/
+header.dark{
+    color: white;
+    background-color: var(--standardMiddleDarkBackground);
+}
+
+#themeSwitchSlider.dark{
+    margin-left: 100%;
+    transform: translateX(-100%);
+    background: var(--standardLightBackground);
+}
+/*------------*/
+
+
+/*---Navigation---*/
+#navigation.dark{
+    color: var(--standardLightTextColor);
+    background: var(--standardMiddleDarkBackground);
+}
+
+
+.navigationItem.dark.active{
+    
+}
+
+.navigationItem.dark:not(.active){
+    color: var(--standardLightTextColor);
+}
+/*---------------*/
+/*---------------*/
+
+/*---Home_page*/
+#homePage.dark{
+    /*background: var(--standardDarkBackground);*/
+}
+
+#welcomeText.dark{
+    color: var(--standardLightTextColor);
+}
+
+#homePageText.dark .middleFont{
+    color: var(--standardLightTextColor);
+}
+
+#homePageText.dark .simpleText{
+    color: var(--standardLightTextColor);
+}
+/*------------*/
+
+
+/*---Search---*/
+#search.dark{
+    background: rgba(233, 75, 60, 0.6);
+    border-left: 1rem solid rgba(255, 5, 165);
+}
+
+#searchForm{
+    border: var(--thinBorder);
+}
+
+#searchTypeSwitch{
+
+}
+
+#searchTypeSwitch > .active{
+    color: var(--standardLightTextColor);
+    background: black;
+}
+
+#searchTypeSwitch > .disabled{
+    color: var(--standardDarkTextColor);
+    background: pink;
+}
+
+#textSearch{
+
+}
+
+#textSearch.hidden{
+    
+}
+
+/*---Store---*/
+#store{
+    /*background: var(--standardDarkBackground);*/
+}
+
+#storeCakeOpeners{
+    
+}
+
+.cakeOpenerLink.dark{
+    color: var(--standardLightTextColor);
+    text-decoration: none;
+}
+
+
+.cakeEditButton{
+    background: rgb(92, 64, 51)/*var(--standardDarkBackground)*/;
+    color: var(--standardLightTextColor);
+}
+
+.amountSelect.dark{
+    color: white;
+}
+
+.amountSelect > button{
+    color: white;
+    /*background: var(--standardDarkBackground);*/
+}
+
+.amountSelect > button:first-child{
+
+}
+
+.amountSelect > button:last-child{
+
+}
+
+.amountSelect.dark > .amount{
+    color: var(--standardLightTextColor);
+}
+
+.addToCartButton{
+    color: var(--standardLightTextColor);
+    /*background: var(--standardDarkBackground);*/
+}
+
+#openCakeEditor.dark{
+    background-color: var(--standardDarkBackground);
+}
+/*---------------*/
+
+/*---Cake---*/
+.cake.dark{
+    border-top: var(--standardBorder);
+    border-bottom: var(--standardBorder);
+}
+
+.cakeDescriptionWindow.dark{
+    color: var(--standardLightTextColor);
+}
+
+.cakeDescriptionWindow.dark > .cakeTitle{
+
+}
+
+.cakeDescriptionWindow.dark > .cakePrice{
+    
+}
+
+.cakeImage{
+
+}
+
+.cakeIngredients.dark{
+    color: var(--standardLightTextColor);
+}
+
+.cakeIngredientsTitle.dark{
+    color: var(--standardLightTextColor);
+}
+
+.cakeIngredient.dark{
+    color: var(--standardLightTextColor);
+}
+
+.cakeReceipt.dark{
+    color: var(--standardLightTextColor);
+}
+
+.cakeReceiptTitle.dark{
+    
+}
+
+.receiptStep.dark{
+    color: var(--standardLightTextColor);
+}
+
+.cakeReceiptStep.dark > .receiptStepOrderNumber{
+    
+}
+
+
+#errorWindow.dark{
+    color: var(--standardLightTextColor);
+    background: rgba(10, 10, 10, 0.4);
+}
+
+/*----------*/
+
+
+/*---Cart---*/
+#cart{
+    /*background: var(--standardDarkBackground);*/
+}
+
+.cakeInCart.dark{ /*Common style with .cakeOpener*/
+    color: var(--standardLightTextColor);
+}
+
+.cakeInCart .cakeImage{
+
+}
+
+.removeFromCartButton{
+
+}
+
+.cakeInCart .amountSelect{
+
+}
+
+#totalPrice.dark{
+    color: var(--standardLightTextColor);
+}
+/*----------*/
+
+/*---User---*/
+#userProfile.dark{
+    color:var(--standardLightTextColor);
+}
+
+#profileThemeImageAndUserInfoWrapper{
+
+}
+
+#profileThemeImage{
+
+}
+
+.editProfileButton, .cancelProfileChangesButton, .logoutButton{
+
+}
+
+.cancelProfileChangesButton{
+
+}
+
+.logoutButton{
+
+}
+
+#userInfo{
+
+}
+
+#userTextInfo{
+
+}
+
+#profileImageWrapper{
+
+}
+
+#profileImage{
+
+}
+
+
+#userTextInfo{
+
+}
+
+#userTextInfo.narrow{
+    
+}
+
+.editUserProfileImageInput{
+
+}
+
+#userName{
+
+}
+
+#whatsNewWindow.dark{
+
+}
+
+#whatsNewWindow.dark{
+
+}
+/*---------*/
+
+/*---Footer---*/
+footer.dark{
+    color: var(--standardLightTextColor);
+    background: var(--standardMiddleDarkBackground);
+    background: black;
+}
+
+footer.dark > div{
+    border-top: var(--standardLightBorder);
+}
+/*------------*/
+
+/*---Media queries*/
+@media screen and (max-width: 400px) {
+    html{
+        font-size: 12px;
+    }
+
+    #navigation{
+        width: 100vw;
+    }
+
+    .navigationItem{
+        width: 100%;
+        flex-grow: none;
+        flex-grow: 0;
+    }
+
+    #navigation > :first-child{
+        border-left: none;
+    }
+
+    #userInfo{
+        margin-left: 0px;
+    }
+
+    #searchForm{
+        width: 80%;
+    }
+
+
+    footer b {
+        font-size: 1.2rem;
+    }
+
+    #copyright{
+        font-size: 1.2rem;
+    }
+
+    #footerSocialMedia > a, #footerTeamNames > span, #footerProducts > span, #company > span, #network > span{
+        font-size: 1.3rem;
+    } 
+}
+
+@media screen and (max-width: 450px) {
+    #searchTitle{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 620px) {
+    #cart{
+        justify-content: center;
+    }
+}
+/*----------------*/
