@@ -593,11 +593,16 @@ header.narrow{
 #cart{
     width: 80%;
     height: max-content;
-    min-height: 90vh; /*To keep footer down*/
+    min-height: 90vh;
+    text-align: center;
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    border: var(--standardBorder);
+}
+
+#cart p{
+    margin-left: 50%;
+    transform: translateX(-50%);
 }
 
 .removeFromCartButton{
@@ -928,10 +933,29 @@ footer b {
     display: none;
 }
 
-#cakeImageForm{
+.cakeImageForm{
+    position: relative;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
+}
+
+.cakeImageInput{
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 1;
+}
+
+.cakeImageInput:hover{
+    color: var(--standardDarkTextColor);
+    background: var(--standardLightTextColor);
+}
+
+.cakeImagePreview{
+    max-width: 70vw;
+    min-width: 300px;
 }
 
 /*-------------------------*/
@@ -1103,6 +1127,10 @@ header.dark{
 /*-----------------*/
 
 /*---Cart---*/
+#cart.dark p{
+    color: var(--standardLightTextColor);
+}
+
 .cakeInCart.dark{ /*Common style with .cakeOpener*/
     color: var(--standardLightTextColor);
 }

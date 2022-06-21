@@ -11,18 +11,25 @@ function Cart({ handleRemoveFromCart, handleCheckout }){
     const cart = useSelector((state) => state.userCart);
     let totalPrice = 0;
 
+    const theme = useSelector((state) => state.theme.themeName);
+
     cart.cakes.forEach((item) => totalPrice += item.cake.price * item.amount);
 
     return(
-        <div id="cart">
+        <div id="cart" className={theme}>
             {
-                cart.cakes.map((item) => 
-                    <CakeInCart 
-                        cake={item.cake} 
-                        amount={item.amount} 
-                        handleRemoveFromCart={handleRemoveFromCart}
-                    />
+            cart.cakes.length > 0 ? 
+                (
+                    cart.cakes.map((item) => 
+                        <CakeInCart 
+                            cake={item.cake} 
+                            amount={item.amount} 
+                            handleRemoveFromCart={handleRemoveFromCart}
+                        />
+                    )
                 )
+                :
+                <p className={theme}>You have no cakes in your cart</p>
             }
             <CheckoutButtonAndTotalPrice totalPrice={totalPrice} handleCheckout={handleCheckout} />
         </div>
