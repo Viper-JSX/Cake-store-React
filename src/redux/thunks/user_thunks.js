@@ -27,11 +27,17 @@ export function register(payload){
     return function(dispatch, getState){
         let userAlreadyExists = false;
         let loginAcceptable = payload.login.length >= 8 ? true : false;
-        let passwordAcceptable = true;
+        let passwordAcceptable = payload.password.length >= 8 ? true : false;
 
-        //const rexexp = /aa/ig;
+        const regexp = /\d/ig;
+        const match = regexp.test(payload.password);
+
+        if(!match){
+            passwordAcceptable = false;
+        }
+
         for(let i = 0; i < users.length; i++){
-            if(users[i].nickname === payload.nickname){
+            if(users[i].nickname.toLowerCase() === payload.nickname.toLowerCase()){
                 userAlreadyExists = true;
                 break;
             }
@@ -55,7 +61,7 @@ export function register(payload){
         }
         else if(!passwordAcceptable){
             if(!getState().error.errorText){
-                dispatch(showErrorMessageAction("Password must contain at least 8 characters, letters, special symbol and numbers"));
+                dispatch(showErrorMessageAction("Password must contain at least 8 characters, letters and numbers"));
                 setTimeout(() => dispatch(showErrorMessageAction("")), 2000); //To hide error window
             }
         }
@@ -76,9 +82,9 @@ export function changeProfileData({ editedProfile, newPasswordData, oldProfile }
             setTimeout(() => dispatch(showErrorMessageAction("")), 2000); //To hide error window
         }
 
-        if(oldProfile.nickname !== editedProfile.nickname){
+        if(oldProfile.nickname.toLowerCase() !== editedProfile.nickname.toLowerCase()){
             for(let i = 0; i < users.length; i++){
-                if(users[i].nickname === editedProfile.nickname){
+                if(users[i].nickname.toLowerCase() === editedProfile.nickname.toLowerCase()){
                     userAlreadyExists = true;
                     break;
                 }
@@ -86,15 +92,16 @@ export function changeProfileData({ editedProfile, newPasswordData, oldProfile }
         }
 
         if(newPasswordData.newPassword && newPasswordData.newPassword != ""){
-            let passwordAcceptable = true;
-            let passwordLengthAcceptable = false;
+            let passwordAcceptable = false;
             let newPasswordAndNewPasswordConfirmationMatch = false;
 
             if(newPasswordData.newPassword == newPasswordData.newPasswordConfirm){
                 newPasswordAndNewPasswordConfirmationMatch = true;
-            
-                if(newPasswordData.newPassword.length >= 8){
-                    passwordLengthAcceptable = true;
+
+                let regexp = /\d/ig;
+                let match = regexp.test(newPasswordData.newPassword);
+                if(newPasswordData.newPassword.length >= 8 && match){
+                    passwordAcceptable = true;
                 }
             }
 
@@ -103,8 +110,8 @@ export function changeProfileData({ editedProfile, newPasswordData, oldProfile }
                 displayError("New passwords don't match");
                 return;
             }
-            else if(!passwordLengthAcceptable){
-                displayError("Password must be at least 8 chars long, contain numbers and symbols");
+            else if(!passwordAcceptable){
+                displayError("Password must be at least 8 chars long, contain letters and digits");
                  //set all newPasswordData fields to ""
                 return
             }

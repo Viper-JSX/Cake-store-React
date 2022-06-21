@@ -7,8 +7,6 @@ function IngredientFrom({ ingredient, mode, orderNumber, handleIngredientsChange
 
     const [ingredientData, setIngredientData] = useState((mode == "edit" && ingredient) ? ingredient : { orderNumber, ingredientName: "", measurementUnit: "", amountOfUnits: 0 });
 
-    //console.log("Ingredient: ", mode == "edit" ? ingredient : { orderNumber, ingredientName: "", measurementUnit: "", amountOfUnits: 0 });
-
     const handleIngredientNameChange = (event) => {
         setIngredientData((prevIngredientData) => ({...prevIngredientData, ingredientName: event.target.value}));
     }
@@ -30,12 +28,9 @@ function IngredientFrom({ ingredient, mode, orderNumber, handleIngredientsChange
 
                 onChange={(event) => {
                         handleIngredientNameChange(event);
-                        console.log(ingredientData);
                     }
                 } 
                 onBlur={() => {
-                    console.log(ingredientData)
-                        console.log("Focus out", ingredientData)
                         handleIngredientsChange(ingredientData);
                     }
                 }
@@ -52,7 +47,6 @@ function IngredientFrom({ ingredient, mode, orderNumber, handleIngredientsChange
                 }
                 
                 onBlur={() => {
-                        console.log("Focus out", ingredientData)
                         handleIngredientsChange(ingredientData);
                     }
                 }
@@ -69,7 +63,6 @@ function IngredientFrom({ ingredient, mode, orderNumber, handleIngredientsChange
                 } 
 
                 onBlur={() => {
-                        console.log("Focus out", ingredientData)
                         handleIngredientsChange(ingredientData);
                     }
                 }

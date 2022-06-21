@@ -12,10 +12,9 @@ import ReceiptEditor from "./Receipt/Receipt_editor";
 function CakeEditor({ mode, handleCakeCreate, handleCakeEdit }){
     const location = useLocation();
     const cakeToEdit = location.state?.cake;
-    const error = useSelector((state) => state.cakeStore.error);
-    if(error){
-        console.log("Here is error", error)
-    }
+    const [theme, error] = useSelector((state) => [state.theme.themeName, state.cakeStore.error]);
+
+
     const [cakeData, setCakeData] = useState(() => mode == "edit" ? {...cakeToEdit, prevCakeTitle : cakeToEdit.title} : new Cake() );
 
     const handleCakeTitleChange = (event) => {
@@ -23,7 +22,6 @@ function CakeEditor({ mode, handleCakeCreate, handleCakeEdit }){
     }
 
     const handleCategoryChange = (event) => {
-        console.log(event.target.value);
         setCakeData((prevCakeData) => ({...prevCakeData, category: event.target.value}));
     }
 
@@ -51,7 +49,6 @@ function CakeEditor({ mode, handleCakeCreate, handleCakeEdit }){
             if(currentIngredientsList[i].orderNumber == ingredient.orderNumber){
                 currentIngredientsList[i] = ingredient;
                 orderNumberAlreadyInList = true;
-                //console.log("Changed ingredient: ", currentIngredientsList[i]);
                 break;
             }
         }
@@ -60,8 +57,7 @@ function CakeEditor({ mode, handleCakeCreate, handleCakeEdit }){
             currentIngredientsList.push(ingredient);
         }
 
-        setCakeData((prevCakeData) => ({...prevCakeData, ingredients: currentIngredientsList}));
-        //console.log("Cake data", cakeData.ingredients);
+        setCakeData((prevCakeData) => ({...prevCakeData, ingredients: currentIngredientsList}))
     }
 
     const handleReceiptStepsChange = ({ orderNumber, stepText }) => {
@@ -111,22 +107,22 @@ function CakeEditor({ mode, handleCakeCreate, handleCakeEdit }){
 
     if(mode == "edit"){
         return(
-            <div>
+            <div id="cakeEditor" className={theme}>
                 {
                     error ? 
                     <ErrorWindow errorMessage={error} />
                     :
                     null
                 }
-                <input type="text" placeholder="Cake title" onChange={handleCakeTitleChange} value={cakeData.title}  />
+                <input className="cakeTitleInput" type="text" placeholder="Cake title" onChange={handleCakeTitleChange} value={cakeData.title}  />
                 <hr />
                 <br />
-                <textarea type="text" placeholder="Cake description" value={cakeData.description} onChange={handleCakeDescriptionChange}></textarea>
+                <textarea className="cakeDescriptionTextArea" type="text" placeholder="Cake description" value={cakeData.description} onChange={handleCakeDescriptionChange}></textarea>
                 <CategorySelect category={cakeData.category} handleCategoryChange={handleCategoryChange} />
-                <ImageInput 
+                <ImageForm 
                     handleCakeImageChange={handleCakeImageChange} 
                     handleImageInputClick={handleImageInputClick} 
-                    cakeImage={cakeData.imageURL} 
+                    imageURL={cakeData.imageURL} 
                 />
                 <hr />
                 <IngredientsEditor 
@@ -144,15 +140,14 @@ function CakeEditor({ mode, handleCakeCreate, handleCakeEdit }){
                 />
                 <hr />
                 <input type="number" placeholder="Cake price" value={cakeData.price} onChange={handleCakePriceChange} />
-                <button onClick={() => handleCakeEdit(cakeData)}>Save</button>
-                <button onClick={() => console.log(cakeData)}>Show cake data</button>
+                <button id="saveCakeChangesButton" onClick={() => handleCakeEdit(cakeData)}>Save</button>
                 <hr />
             </div>
         );
     }
 
     return(
-        <div id="cakeEditor">
+        <div id="cakeEditor" className={theme}>
             <input className="cakeTitleInput" type="text" placeholder="Cake title" value={cakeData.title} onChange={handleCakeTitleChange} />
             <br />
             <textarea className="cakeDescriptionTextArea" type="text" cols={30} rows={5} placeholder="Cake description" value={cakeData.description} onChange={handleCakeDescriptionChange}></textarea>
@@ -161,7 +156,7 @@ function CakeEditor({ mode, handleCakeCreate, handleCakeEdit }){
             <ImageForm 
                 handleCakeImageChange={handleCakeImageChange} 
                 handleImageInputClick={handleImageInputClick} 
-                cakeImage={cakeData.imageURL} 
+                imageURL={cakeData.imageURL} 
             />
             <hr />
             <IngredientsEditor 
@@ -178,8 +173,7 @@ function CakeEditor({ mode, handleCakeCreate, handleCakeEdit }){
 
             <hr />
             <input type="number" placeholder="Cake price" value={cakeData.price} onChange={handleCakePriceChange} />
-            <button type="submit" onClick={() => {handleCakeCreate(cakeData); console.log("SEnding:", cakeData)}}>Save</button>
-            <button onClick={() => console.log(cakeData)}>Show cake data</button>
+            <button id="saveCakeChangesButton" type="submit" onClick={() => handleCakeCreate(cakeData)}>Save</button>
         </div>
     );
 }

@@ -87,6 +87,10 @@ header.narrow{
     flex-grow: 0.25;
 }
 
+.navigationItemIcon{
+    font-size: 1.5rem;
+}
+
 .navigationItem.active{
     color: pink;
     text-decoration: underline;
@@ -263,7 +267,7 @@ header.narrow{
 
 #searchTitle{
     font-size: 2rem;
-    color: var(--standardLightTextColor);
+    color: var(--standardMiddleDarkBackground);
     font-family: monospace;
 }
 
@@ -341,7 +345,7 @@ header.narrow{
     width: 24%;
     height: 25vw;
     min-width: 250px;
-    min-height: 320px;
+    min-height: 350px;
     /*min-height: 320px;*/
     border: var(--thinBorder)/*var(--standardBorder)*/;
     /*display: fex;*/
@@ -353,9 +357,15 @@ header.narrow{
 .cakeOpener .cakeImage, .cakeInCart .cakeImage{
     width: 70%;
     height: 50% /*or auto*/;
+    min-width: 200px;
+    min-height: 150px;
     border: var(--standardBorder);
     border-color: pink;
     border-radius: 0.5rem;
+}
+
+.cakeOpener .cakeImage{
+    margin-top: 1rem;
 }
 
 .cakeOpenerLink{
@@ -434,27 +444,14 @@ header.narrow{
     align-self: center;
 }
 
+#cakeEditor > hr{
+    width: 100%;
+}
+
 .cakeTitleInput{
     width: 15rem;
     height: 2rem;
     font-size: 1rem;
-}
-
-.cakeDescriptionTextArea{
-
-}
-
-#cakeImageForm{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-
-#cakeImageForm > .cakeImageInput{
-}
-
-#cakeImageInput{
-
 }
 
 #cakeImagePreview{
@@ -463,6 +460,8 @@ header.narrow{
 
 .ingredientsEditor{
     margin-bottom: 3rem;
+    color: var(--standardLightTextColor);
+    background: var(--standardDarkBackground);
     display: flex;
     flex-wrap: wrap;
 }
@@ -476,7 +475,11 @@ header.narrow{
 }
 
 .receiptStepForm{
-    background-color: purple;
+    width: 30vw;
+    min-width: 300px;
+    margin-top: 0.3rem;
+    color: var(--standardLightTextColor);
+    background-color: var(--standardDarkBackground);
 }
 
 .receiptStepForm > textarea{
@@ -485,6 +488,18 @@ header.narrow{
 
 .addOrRemoveForm{
     flex-basis: 100%;
+}
+
+.addOrRemoveForm button{
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--standardLightTextColor);
+    background: var(--standardDarkBackground);
+}
+
+#saveCakeChangesButton{
+    color: var(--standardLightTextColor);
+    background: var(--standardDarkBackground);
 }
 /*-----------------*/
 
@@ -518,7 +533,7 @@ header.narrow{
 }
 
 .cake .cakeImage{
-    width: 50%;
+    width: 30%;
     height: auto;
     min-width: 300px;
     border: var(--standardBorder);
@@ -558,9 +573,11 @@ header.narrow{
 #errorWindow{
     width: 100vw;
     height: 100vh;
+    top: 0;
+    left: 0;
     color: var(--standardLightTextColor);
     background: rgba(10, 10, 10, 0.4);
-    position: absolute;
+    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -584,9 +601,15 @@ header.narrow{
 }
 
 .removeFromCartButton{
-
     margin-left: 100%;
+    color: var(--standardLightTextColor);
+    background: var(--standardMiddleDarkBackground);
     transform: translateX(-100%);
+    border-radius: 0.3rem;
+}
+
+.removeFromCartButton:hover{
+    background: orange;
 }
 
 .cakeInCart .amountSelect{
@@ -680,7 +703,7 @@ header.narrow{
 #profileImage{
     width: 12rem;
     height: 12rem;
-    border: 0.5rem solid white;
+    border: 0.5rem solid var(--standardLightBackground);
     border-radius: 50%;
     /*transform: translateY(-40%);*/
 }
@@ -702,10 +725,6 @@ header.narrow{
     display: none;
 }
 
-#loginAndPasswordEditor{
-
-}
-
 #loginAndPasswordEditor > b{
     flex-basis: 100%;
 }
@@ -714,10 +733,24 @@ header.narrow{
     color: orange;
 }
 
-
-#whatsNewWindow{
-
+.post{
+    width: max-content;
+    border-top: var(--standardBorder);
 }
+
+.postDeleteButton{
+    width: max-content;
+    color: orangered;
+    border: var(--thinBorder);
+    cursor: pointer;
+}
+
+.postDeleteButton:hover{
+    color: var(--standardLightTextColor);
+    background: var(--standardDarkBackground);
+    border-color: var(--standardLightTextColor);
+}
+
 /*---Auth_form*/
 #authFormWrapper{
     min-height: 90vh; /*To keep footer down*/
@@ -763,10 +796,6 @@ header.narrow{
 #login, #register{
     height: 90%;
     position: relative;
-    /*display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;*/
 }
 
 #login > .inputsWrapper, #register > .inputsWrapper{
@@ -898,6 +927,13 @@ footer b {
 .imageSelectInput input{
     display: none;
 }
+
+#cakeImageForm{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
 /*-------------------------*/
 
 
@@ -940,10 +976,6 @@ header.dark{
 }
 
 
-.navigationItem.dark.active{
-    
-}
-
 .navigationItem.dark:not(.active){
     color: var(--standardLightTextColor);
 }
@@ -951,10 +983,6 @@ header.dark{
 /*---------------*/
 
 /*---Home_page*/
-#homePage.dark{
-    /*background: var(--standardDarkBackground);*/
-}
-
 #welcomeText.dark{
     color: var(--standardLightTextColor);
 }
@@ -971,16 +999,16 @@ header.dark{
 
 /*---Search---*/
 #search.dark{
-    background: rgba(233, 75, 60, 0.6);
+    background: black/*#734967/*rgba(233, 75, 60, 0.6)*/;
     border-left: 1rem solid rgba(255, 5, 165);
+}
+
+#searchTitle.dark{
+    color: var(--standardLightTextColor);
 }
 
 #searchForm{
     border: var(--thinBorder);
-}
-
-#searchTypeSwitch{
-
 }
 
 #searchTypeSwitch > .active{
@@ -993,23 +1021,7 @@ header.dark{
     background: pink;
 }
 
-#textSearch{
-
-}
-
-#textSearch.hidden{
-    
-}
-
 /*---Store---*/
-#store{
-    /*background: var(--standardDarkBackground);*/
-}
-
-#storeCakeOpeners{
-    
-}
-
 .cakeOpenerLink.dark{
     color: var(--standardLightTextColor);
     text-decoration: none;
@@ -1030,14 +1042,6 @@ header.dark{
     /*background: var(--standardDarkBackground);*/
 }
 
-.amountSelect > button:first-child{
-
-}
-
-.amountSelect > button:last-child{
-
-}
-
 .amountSelect.dark > .amount{
     color: var(--standardLightTextColor);
 }
@@ -1048,6 +1052,7 @@ header.dark{
 }
 
 #openCakeEditor.dark{
+    color: var(--standardLightTextColor);
     background-color: var(--standardDarkBackground);
 }
 /*---------------*/
@@ -1060,18 +1065,6 @@ header.dark{
 
 .cakeDescriptionWindow.dark{
     color: var(--standardLightTextColor);
-}
-
-.cakeDescriptionWindow.dark > .cakeTitle{
-
-}
-
-.cakeDescriptionWindow.dark > .cakePrice{
-    
-}
-
-.cakeImage{
-
 }
 
 .cakeIngredients.dark{
@@ -1090,18 +1083,9 @@ header.dark{
     color: var(--standardLightTextColor);
 }
 
-.cakeReceiptTitle.dark{
-    
-}
-
 .receiptStep.dark{
     color: var(--standardLightTextColor);
 }
-
-.cakeReceiptStep.dark > .receiptStepOrderNumber{
-    
-}
-
 
 #errorWindow.dark{
     color: var(--standardLightTextColor);
@@ -1111,26 +1095,27 @@ header.dark{
 /*----------*/
 
 
-/*---Cart---*/
-#cart{
-    /*background: var(--standardDarkBackground);*/
+/*---Cake_editor---*/
+#cakeEditor.dark .cakeImageForm{
+    color: var(--standardLightTextColor);
 }
 
+/*-----------------*/
+
+/*---Cart---*/
 .cakeInCart.dark{ /*Common style with .cakeOpener*/
     color: var(--standardLightTextColor);
 }
 
-.cakeInCart .cakeImage{
-
+.removeFromCartButton.dark{
+    color: var(--standardDarkTextColor);
+    background: var(--standardLightBackground);
 }
 
-.removeFromCartButton{
-
+.removeFromCartButton.dark:hover{
+    background: orange;
 }
 
-.cakeInCart .amountSelect{
-
-}
 
 #totalPrice.dark{
     color: var(--standardLightTextColor);
@@ -1142,66 +1127,10 @@ header.dark{
     color:var(--standardLightTextColor);
 }
 
-#profileThemeImageAndUserInfoWrapper{
-
+#profileImage.dark{
+    border-color: var(--standardDarkBackground);
 }
 
-#profileThemeImage{
-
-}
-
-.editProfileButton, .cancelProfileChangesButton, .logoutButton{
-
-}
-
-.cancelProfileChangesButton{
-
-}
-
-.logoutButton{
-
-}
-
-#userInfo{
-
-}
-
-#userTextInfo{
-
-}
-
-#profileImageWrapper{
-
-}
-
-#profileImage{
-
-}
-
-
-#userTextInfo{
-
-}
-
-#userTextInfo.narrow{
-    
-}
-
-.editUserProfileImageInput{
-
-}
-
-#userName{
-
-}
-
-#whatsNewWindow.dark{
-
-}
-
-#whatsNewWindow.dark{
-
-}
 /*---------*/
 
 /*---Footer---*/
@@ -1215,6 +1144,14 @@ footer.dark > div{
     border-top: var(--standardLightBorder);
 }
 /*------------*/
+
+
+/*---Common_styles---*/
+.imageSelectInput.dark{
+    color: var(--standardDarkTextColor);
+    background: var(--standardLightBackground);
+}
+/*------------------*/
 
 /*---Media queries*/
 @media screen and (max-width: 400px) {

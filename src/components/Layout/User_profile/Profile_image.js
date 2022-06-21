@@ -1,4 +1,8 @@
+import { useSelector } from "react-redux";
+
 function ProfileImage({ profileImageURL, newProfileImagePreviewURL, profileMode, handleUserImageChange }){
+    const theme = useSelector((state) => state.theme.themeName);
+        
     return(
         <div id="profileImageWrapper">
             {
@@ -10,7 +14,7 @@ function ProfileImage({ profileImageURL, newProfileImagePreviewURL, profileMode,
                 :
                 null
             }
-            <img id="profileImage" src={newProfileImagePreviewURL ? newProfileImagePreviewURL : profileImageURL} alt="Profile image" />
+            <img id="profileImage" className={theme} src={newProfileImagePreviewURL ? newProfileImagePreviewURL : profileImageURL} alt="Profile image" />
         </div>
     );
 }

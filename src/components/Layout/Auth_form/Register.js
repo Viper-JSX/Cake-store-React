@@ -5,17 +5,14 @@ function Register({ handleRegister }){
 
     const handleNicknameChange = (str) => {
         setRegisterData((prevRegisterData) => ({...prevRegisterData, nickname: str}));
-        console.log(registerData.nickname, str);
     };
 
     const handleLoginChange = (str) => {
         setRegisterData((prevRegisterData) => ({...prevRegisterData, login: str}));
-        console.log(registerData)
     };
 
     const handlePasswordChange = (str) => {
         setRegisterData((prevRegisterData) => ({...prevRegisterData, password: str}));
-        console.log(registerData)
     };
 
     return(

@@ -12,7 +12,6 @@ function Cart({ handleRemoveFromCart, handleCheckout }){
     let totalPrice = 0;
 
     cart.cakes.forEach((item) => totalPrice += item.cake.price * item.amount);
-    console.log(cart);
 
     return(
         <div id="cart">

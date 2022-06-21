@@ -1,5 +1,5 @@
 import User from '../classes/User.js'
-import { ADD_CAKE_TO_STORE, REMOVE_CAKE_FROM_STORE, ADD_CAKE_TO_CART, REMOVE_CAKE_FROM_CART, LOGIN, REGISTER, LOGOUT, UPDATE_CAKE_IN_STORE, CHANGE_SEARCH_TYPE, SEARCH_BY_SEARCH_TERM, SEARCH_BY_CATEGORY, SORT_BY, SELECT_CAKES_TO_SHOW, APPLY_SEARCH_PARAMS, ERROR_FOUND, ADD_POST, CHANGE_PROFILE_DATA, SWITCH_THE_THEME, SWITCH_TO_NARROW_SCREEN_MODE, SWITCH_TO_WIDE_SCREEN_MODE, TOGGLE_NAVIGATION, CHECKOUT } from "./actions/action_types.js";
+import { ADD_CAKE_TO_STORE, REMOVE_CAKE_FROM_STORE, ADD_CAKE_TO_CART, REMOVE_CAKE_FROM_CART, LOGIN, REGISTER, LOGOUT, UPDATE_CAKE_IN_STORE, CHANGE_SEARCH_TYPE, SEARCH_BY_SEARCH_TERM, SEARCH_BY_CATEGORY, SORT_BY, SELECT_CAKES_TO_SHOW, APPLY_SEARCH_PARAMS, ERROR_FOUND, ADD_POST, CHANGE_PROFILE_DATA, SWITCH_THE_THEME, SWITCH_TO_NARROW_SCREEN_MODE, SWITCH_TO_WIDE_SCREEN_MODE, TOGGLE_NAVIGATION, CHECKOUT, DELETE_POST } from "./actions/action_types.js";
 
 import cakes from '../different_things/cakes.js';
 import { users } from "../different_things/users.js";
@@ -11,7 +11,6 @@ export function userCart(state = {cakes: []}, action){
         case ADD_CAKE_TO_CART:{
 
             let currentCakeCartList = [...state.cakes];
-            console.log(action.payload)
             let cakeAlreadyInCart = false;
             for(let i = 0; i < currentCakeCartList.length; i++){
                 if(currentCakeCartList[i].cake.title == action.payload.cake.title){
@@ -22,7 +21,6 @@ export function userCart(state = {cakes: []}, action){
             }
 
             if(cakeAlreadyInCart){
-                //console.log("already in cart:", )
                 return({...state, cakes: currentCakeCartList});
             }
 
@@ -80,7 +78,6 @@ export function cakeStore(state = {cakes, cakesToDisplay: [...cakes].sort((a, b)
                 //cakes reset to default value after each routing
                 if(state.cakes[i].title == action.payload.title){
                     cakeAlreadyInStore = true;
-                    console.log("Already in store");
                     break;
                 }
             }
@@ -118,12 +115,10 @@ export function user(state = null, action){
             return action.payload;
         }
         case LOGOUT:{
-            console.log("Logging out: ",state)
             return null;
         }
         case REGISTER:{
             if(action.payload.password.length < 8){
-                //console.log("Password is too short");
             }
 
             let userAlreadyExists = false;
@@ -136,7 +131,6 @@ export function user(state = null, action){
             }
 
             if(userAlreadyExists){
-                console.log("Already exists");
                 return null;
             }
 
@@ -153,9 +147,18 @@ export function user(state = null, action){
             }   
             //return({...state, posts: [...state.posts, action.payload]}); //Use method of user
         }
-        case CHANGE_PROFILE_DATA: {
-            console.log("Changing profile: ", action.payload);
 
+        case DELETE_POST: {
+            for(let i = 0; i < users.length; i++){
+                if(users[i].nickname == action.payload.author){
+                    users[i].deletePost(action.payload);
+                    return {...users[i]};
+                }
+            }
+            return state;
+        }
+
+        case CHANGE_PROFILE_DATA: {
             for(let i = 0; i < users.length; i++){
                 if(users[i].nickname == action.payload.oldProfile.nickname){
                     users[i].changeData(action.payload.editedProfile, action.payload.newPasswordData);
@@ -215,15 +218,12 @@ export function theme(state = { themeName: "light" }, action){
 export function screen(state = { screenWidth: "wide", navigationIsVisible: false }, action){
     switch(action.type){
         case SWITCH_TO_WIDE_SCREEN_MODE: {
-            console.log("Wide")
             return({ ...state, screenWidth: "wide" })
         }
         case SWITCH_TO_NARROW_SCREEN_MODE: {
-            console.log("Narrow")
             return({ ...state, screenWidth: "narrow" })
         }
         case TOGGLE_NAVIGATION: {
-            console.log("Navigation")
             return({...state, navigationIsVisible: !state.navigationIsVisible})
         }
         default: {

@@ -3,7 +3,6 @@ import EditProfileButton from "./Edit_profile_button";
 import LogoutButton from "./Logout_button";
 
 function ProfileTheme({ user, profileMode, profileThemeImageURL, newProfileThemeImagePreviewURL, editedProfile, newPasswordData, handleLogout, handleProfileModeChange, handleProfileDataChange, handleCancelProfileChanges, handleProfileThemeChange }){
-    //console.log(newProfileThemeImagePreview);
 
     return(
         <div id="profileThemeImage" style={{backgroundImage: `url(${newProfileThemeImagePreviewURL !== "" ? newProfileThemeImagePreviewURL : profileThemeImageURL})`}}>

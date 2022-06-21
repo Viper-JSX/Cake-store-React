@@ -2,9 +2,7 @@ import { changeSearchTypeAction, changeSortCriteriaAction, searchByCategoryActio
 import { applySearchParamsAction } from "../actions/store_actions";
 
 export function changeSearchType(payload){
-    console.log("RUn")
     return function(dispatch, getState){
-        console.log("Changing search type in thunk to: ", payload);
         dispatch(changeSearchTypeAction(payload));
         dispatch(applySearchParamsAction(getState().search));
     }

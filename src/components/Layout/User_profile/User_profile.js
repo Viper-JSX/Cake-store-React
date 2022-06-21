@@ -5,15 +5,14 @@ import { useState } from "react";
 import UserInfo from "./User_info";
 import ProfileTheme from "./Profile_theme";
 import WhatsNewWindow from "./Whats_new_window";
-import UserPosts from "./User_posts";
+import UserPosts from "./Post/User_posts";
 import PasswordEditor from "./Password_editor/Password_editor";
 
-function UserProfile({ handleLogout, handleAddPost, handleProfileDataChange }){
+function UserProfile({ handleLogout, handleAddPost, handlePostDelete, handleProfileDataChange }){
     const [ user, theme ] = useSelector((state) => [ state.user, state.theme.themeName ]);
     const [ profileMode, setProfileMode ] = useState("preview");
     const [ editedProfile, setEditedProfile ] = useState({...user});
     const [ newPasswordData, setNewPasswordData ] = useState({});
-    //console.log("Intitial profile: ", editedProfile)
 
     const handleProfileModeChange = () => {
         setProfileMode((prevProfileMode) => {
@@ -39,7 +38,6 @@ function UserProfile({ handleLogout, handleAddPost, handleProfileDataChange }){
         const reader = new FileReader();
         reader.readAsDataURL(event.target.files[0]);
         reader.onload = (event) => setEditedProfile((prevProfile) => ({...prevProfile, profileImageURL: event.srcElement.result}));
-        console.log("User edited: ", editedProfile);
     }
 
     const handleProfileThemeChange = (event) => {
@@ -51,7 +49,6 @@ function UserProfile({ handleLogout, handleAddPost, handleProfileDataChange }){
     }
 
     const handleNewPasswordDataChange = ({ newPasswordData }) => {
-        //console.log("Changing: ", newPasswordData)
         setNewPasswordData(newPasswordData)
     }
 
@@ -107,7 +104,7 @@ function UserProfile({ handleLogout, handleAddPost, handleProfileDataChange }){
                 profileMode == "preview" ? 
                 <>
                     <WhatsNewWindow userName={user.nickname} handleAddPost={handleAddPost} />
-                    <UserPosts posts={user.posts} />
+                    <UserPosts posts={user.posts} handlePostDelete={handlePostDelete} />
                 </>
                 :
                 null

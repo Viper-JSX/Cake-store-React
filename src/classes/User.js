@@ -19,8 +19,18 @@ class User{
     }
 
     addPost(postText){
-        let newPost = { text: postText, date: new Date() };
+        let newPost = { text: postText, date: new Date(), author: this.nickname };
         this.posts.push(newPost);
+    }
+
+    deletePost(post){
+        for(let i = 0; i < this.posts.length; i++){
+            if(post.date == this.posts[i].date){
+                this.posts.splice(i, 1);
+                console.log("deleting");
+                break;
+            }
+        }
     }
 }
 

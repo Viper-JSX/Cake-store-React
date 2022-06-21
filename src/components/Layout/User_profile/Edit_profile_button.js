@@ -1,5 +1,5 @@
 function EditProfileButton({ user, profileMode, editedProfile, newPasswordData, handleProfileModeChange, handleProfileDataChange }){
-    console.log(newPasswordData)
+    
     return(
         <button id="editProfileButton" className="standardButton" onClick={
             (event) => {

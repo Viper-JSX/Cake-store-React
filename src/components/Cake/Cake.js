@@ -14,7 +14,6 @@ function Cake({ cake, handleAddToCart }){
     const [amount, setAmount] = useState(0);
 
     const handleAmountChange = (quantity) => {
-        console.log(amount, cake);
         setAmount((prevAmount) => prevAmount + quantity);
     }
 

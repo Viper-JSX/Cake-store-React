@@ -2,7 +2,6 @@ import CakeDescription from "./Cake_description";
 import CakeImage from "./Cake_image";
 
 function CakeImageAndDescription({ imageURL, title, description, price }){
-    console.log(imageURL)
     return(
         <div className="cakeImageAndDescription">
             <CakeImage imageURL={imageURL} />

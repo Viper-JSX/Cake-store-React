@@ -17,7 +17,7 @@ import Search from "./Search/Search";
 import ErrorWindow from "../Error/Error_window";
 import Footer from "./Footer/Footer";
 
-function Layout({ handleThemeChange, handleNavigationToggle, handleLogin, handleLogout, handleRegister, handleAddPost, handleProfileDataChange, handleAddToCart, handleRemoveFromCart, handleCakeCreate, handleCakeEdit, handleCheckout, handleSearchTypeChange, handleSearchBySearchTerm, handleSearchByCategory, handleSortingCriteriaChange }){
+function Layout({ handleThemeChange, handleNavigationToggle, handleLogin, handleLogout, handleRegister, handleAddPost, handlePostDelete, handleProfileDataChange, handleAddToCart, handleRemoveFromCart, handleCakeCreate, handleCakeEdit, handleCheckout, handleSearchTypeChange, handleSearchBySearchTerm, handleSearchByCategory, handleSortingCriteriaChange }){
     const cakes = useSelector((state) => state.cakeStore.cakes);
     const error = useSelector((state) => state.error.errorText);
     const theme = useSelector((state) => state.theme.themeName);
@@ -57,7 +57,7 @@ function Layout({ handleThemeChange, handleNavigationToggle, handleLogin, handle
                 <Route path="/store/:cake_name/edit" element={<CakeEditor mode="edit" handleCakeEdit={handleCakeEdit} /*cake={cake}*/ />} />
                 <Route path="/store/create-cake" element={<CakeEditor mode="create" handleCakeCreate={handleCakeCreate} />} />
                 <Route path="/cart" element={<Cart handleRemoveFromCart={handleRemoveFromCart} handleCheckout={handleCheckout} />} />
-                <Route path="/user" element={<UserProfile handleLogout={handleLogout} handleAddPost={handleAddPost} handleProfileDataChange={handleProfileDataChange} />} />
+                <Route path="/user" element={<UserProfile handleLogout={handleLogout} handleAddPost={handleAddPost} handlePostDelete={handlePostDelete} handleProfileDataChange={handleProfileDataChange} />} />
                 <Route path="/authorization" element={<AuthForm />}>
                     <Route path="login" element={<Login handleLogin={handleLogin}/>} />
                     <Route path="register" element={<Register handleRegister={handleRegister} />} />

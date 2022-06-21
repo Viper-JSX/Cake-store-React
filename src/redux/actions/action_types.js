@@ -12,6 +12,7 @@ export const LOGOUT = "LOGOUT";
 export const REGISTER = "REGISTER";
 export const ADD_POST = "ADD_POST";
 export const CHANGE_PROFILE_DATA = "CHANGE_PROFILE_DATA";
+export const DELETE_POST = "DELETE_POST";
 
 export const CHANGE_SEARCH_TYPE = "CHANGE_SEARCH_TYPE";
 export const SEARCH_BY_SEARCH_TERM = "SEARCH_BY_SEARCH_TERM";

@@ -11,7 +11,7 @@ import { changeSearchType, changeSortCriteria, searchByCategory, searchBySearchT
 import { emptyFieldsLeftAction } from './redux/actions/store_actions';
 import { addCakeToStore, updateCakeInStore } from './redux/thunks/store_thunks';
 import { changeProfileData, login, logout, register } from './redux/thunks/user_thunks';
-import { addPostAction, changeProfileDataAction, logoutAction } from './redux/actions/user_actions';
+import { addPostAction, changeProfileDataAction, deletePost, logoutAction } from './redux/actions/user_actions';
 import { ThemeContextProvider } from './Context/Theme_context';
 import { switchThemeAction } from './redux/actions/theme_actions';
 import { useSelector } from 'react-redux';
@@ -22,16 +22,13 @@ function App() {
     const navigate = useNavigate();
 
     if(theme == "light"){
-        console.log(document.body.classList)
         document.body.classList.remove("dark");
     }
     else{
-        console.log(document.body.classList)
         document.body.classList.add("dark");
     }
 
     const handleScreenWidthChange = () => {
-        console.log(document.body.clientWidth)
         if(document.body.clientWidth < 400){
             dispatch(switchToNarrowScreenModeAction());
         }
@@ -42,7 +39,6 @@ function App() {
 
     const handleNavigationToggle = () => {
         dispatch(toggleNavigationAction());
-        console.log("Toggling")
     }
 
     const handleThemeChange = () => {
@@ -80,8 +76,11 @@ function App() {
     }
 
     const handleProfileDataChange = ({ editedProfile, newPasswordData, oldProfile }) => {
-        console.log(newPasswordData)
         dispatch(changeProfileData({ editedProfile, newPasswordData, oldProfile }));
+    }
+
+    const handlePostDelete = (post) => {
+        dispatch(deletePost(post));
     }
 
     const handleCakeCreate = (cake) => {
@@ -90,6 +89,7 @@ function App() {
 
     const handleCakeEdit = (cake) => {
         dispatch(updateCakeInStore(cake));
+        //navigate(`/store/${cake.title.replace(" ", "-").toLowerCase()}`);
     }
 
     const handleCakeRemove = (cake) => {
@@ -134,6 +134,7 @@ function App() {
                     handleLogout={handleLogout}
                     handleRegister={handleRegister}
                     handleAddPost={handleAddPost}
+                    handlePostDelete={handlePostDelete}
                     handleProfileDataChange={handleProfileDataChange}
                     //handleLoginDataChange={handleLoginDataChange}
 

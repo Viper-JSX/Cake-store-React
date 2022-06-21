@@ -20,7 +20,6 @@ function CakeInCart({ cake, amount, handleRemoveFromCart }){
         
         setCurrentAmount((prevCurrentAmount) => prevCurrentAmount + quantity);
         dispatch(addCakeToCartAction({cake, amount: quantity})); //To display changed  amount in cart
-        console.log(amount)
     };
 
     return(
