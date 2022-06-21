@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router";
+import { Navigate, useLocation } from "react-router";
 import Cake from "../../../classes/Cake";
 import ErrorWindow from "../../Error/Error_window";
 import CategorySelect from "./Category_select";
 import ImageForm from "./Image_form";
-import ImageInput from "./Image_input";
 import IngredientsEditor from "./Ingredient/Ingredients_editor";
 import ReceiptEditor from "./Receipt/Receipt_editor";
 
@@ -14,8 +13,13 @@ function CakeEditor({ mode, handleCakeCreate, handleCakeEdit }){
     const cakeToEdit = location.state?.cake;
     const [theme, error] = useSelector((state) => [state.theme.themeName, state.cakeStore.error]);
 
+    const [cakeData, setCakeData] = useState(() => mode === "edit" ? {...cakeToEdit, prevCakeTitle : cakeToEdit.title} : new Cake() );
 
-    const [cakeData, setCakeData] = useState(() => mode == "edit" ? {...cakeToEdit, prevCakeTitle : cakeToEdit.title} : new Cake() );
+    /*if(!cakeToEdit){
+        return(
+            <Navigate to="/" />
+        );
+    }*/
 
     const handleCakeTitleChange = (event) => {
         setCakeData((prevCakeData) => ({...prevCakeData, title: event.target.value}));
@@ -46,14 +50,14 @@ function CakeEditor({ mode, handleCakeCreate, handleCakeEdit }){
         let orderNumberAlreadyInList = false;
 
         for(let i = 0; i < currentIngredientsList.length; i++){
-            if(currentIngredientsList[i].orderNumber == ingredient.orderNumber){
+            if(currentIngredientsList[i].orderNumber === ingredient.orderNumber){
                 currentIngredientsList[i] = ingredient;
                 orderNumberAlreadyInList = true;
                 break;
             }
         }
 
-        if(orderNumberAlreadyInList == false){
+        if(orderNumberAlreadyInList === false){
             currentIngredientsList.push(ingredient);
         }
 
@@ -65,7 +69,7 @@ function CakeEditor({ mode, handleCakeCreate, handleCakeEdit }){
         let orderNumberAlreadyInList = false;
 
         for(let i = 0; i < currentReceiptStepsList.length; i++){
-            if(currentReceiptStepsList[i].orderNumber == orderNumber){
+            if(currentReceiptStepsList[i].orderNumber === orderNumber){
                 orderNumberAlreadyInList = true;
                 currentReceiptStepsList[i] = {orderNumber, stepText};
                 break;
@@ -105,7 +109,7 @@ function CakeEditor({ mode, handleCakeCreate, handleCakeEdit }){
         setCakeData((prevCakeData) => ({...prevCakeData, receipt: currentReceiptStepsList}));
     }
 
-    if(mode == "edit"){
+    if(mode === "edit"){
         return(
             <div id="cakeEditor" className={theme}>
                 {

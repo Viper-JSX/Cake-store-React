@@ -6,19 +6,19 @@ import { faPinterest } from '@fortawesome/free-solid-svg-icons';
 function FooterSocialMedia(){
     return(
         <div id="footerSocialMedia">
-            <a href="#">
+            <a href="//#">
                 <span>{/*<FontAwesomeIcon icon={null} ></FontAwesomeIcon>*/} Blog</span>
             </a>
 
-            <a href="#">
+            <a href="//#">
                 <span>{/*<FontAwesomeIcon icon={null} ></FontAwesomeIcon>*/}Facebook</span>
             </a>
 
-            <a href="#">
+            <a href="//#">
                 <span>{/*<FontAwesomeIcon icon={null} ></FontAwesomeIcon>*/}Twitter</span>
             
             </a>
-            <a href="#">
+            <a href="//#">
                 <span>{/*<FontAwesomeIcon icon={null} ></FontAwesomeIcon>*/}Pinterest</span>
             </a>
         </div>

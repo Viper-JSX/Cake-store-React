@@ -6,12 +6,12 @@ function CakeReceipt({ title, receipt }){
     const theme = useSelector((state) => state.theme.themeName);
     
     return(
-    <div className={`cakeReceipt ${theme}`} key={receipt[0] + title}>
+    <div className={`cakeReceipt ${theme}`} >
         <p className='cakeReceiptTitle'>Receipt</p>
         <hr/>
             {
-                receipt.map((step, index) =>
-                    <ReceiptStep step={step} />
+                receipt.map((step) =>
+                    <ReceiptStep step={step} key={step.stepText + title} />
                 )
             }
     </div>

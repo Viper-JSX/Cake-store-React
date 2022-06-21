@@ -4,7 +4,7 @@ import ReceiptStepForm from "./Receipt_step_form";
 
 function ReceiptEditor({cakeReceipt, mode, handleReceiptStepsChange, getAndSetCurrentNumberOfReceiptSteps }){
     const [amountOfSteps, setAmountOfSteps] = useState(() => {
-        if(mode == "edit"){
+        if(mode === "edit"){
             return cakeReceipt.map((receipt) => 0);
         }
 
@@ -16,7 +16,7 @@ function ReceiptEditor({cakeReceipt, mode, handleReceiptStepsChange, getAndSetCu
     }
 
     const handleStepRemove = () => {
-        if(amountOfSteps.length == 1) return;
+        if(amountOfSteps.length === 1) return;
 
         let currentAmountOfSteps = [...amountOfSteps];
         currentAmountOfSteps.length = currentAmountOfSteps.length - 1;
@@ -27,16 +27,16 @@ function ReceiptEditor({cakeReceipt, mode, handleReceiptStepsChange, getAndSetCu
     return(
         <div className="receiptEditor">
             {
-                mode == "create" ? 
+                mode === "create" ? 
                 (    
                     amountOfSteps.map((step, index) =>
-                        <ReceiptStepForm orderNumber={index + 1} mode={mode} handleReceiptStepsChange={handleReceiptStepsChange} key={step.stepText} />
+                        <ReceiptStepForm orderNumber={index + 1} mode={mode} handleReceiptStepsChange={handleReceiptStepsChange} key={index} />
                     )
                 )
                 :
                 (
                     amountOfSteps.map((step, index) =>
-                        <ReceiptStepForm orderNumber={index + 1} receiptStep={cakeReceipt[index]} mode={mode} handleReceiptStepsChange={handleReceiptStepsChange} key={step.stepText} />
+                        <ReceiptStepForm orderNumber={index + 1} receiptStep={cakeReceipt[index]} mode={mode} handleReceiptStepsChange={handleReceiptStepsChange} key={index} />
                     )
                 )   
             }
@@ -48,7 +48,7 @@ function ReceiptEditor({cakeReceipt, mode, handleReceiptStepsChange, getAndSetCu
 
                 onClickEventForRemove={() => {
                     handleStepRemove();
-                    getAndSetCurrentNumberOfReceiptSteps(amountOfSteps.length != 1 ? amountOfSteps.length - 1 : 1);
+                    getAndSetCurrentNumberOfReceiptSteps(amountOfSteps.length !== 1 ? amountOfSteps.length - 1 : 1);
                 }}
             />
         </div>

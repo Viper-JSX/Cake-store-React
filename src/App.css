@@ -658,7 +658,7 @@ header.narrow{
     height: 300px;
     background-position: center;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: top;
 }
 

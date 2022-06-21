@@ -1,10 +1,5 @@
 import { useSelector } from "react-redux";
-import Cake from "../../../classes/Cake";
-import CakeOpener from "../../Cake/Cake_opener";
 import CakeInCart from "./Cake_in_cart";
-import { createPortal } from "react-dom";
-import TotalPrice from "./Total_price";
-import CheckoutButton from "./Checkout_button";
 import CheckoutButtonAndTotalPrice from "./Checkout_button_and_total_price";
 
 function Cart({ handleRemoveFromCart, handleCheckout }){
@@ -25,6 +20,7 @@ function Cart({ handleRemoveFromCart, handleCheckout }){
                             cake={item.cake} 
                             amount={item.amount} 
                             handleRemoveFromCart={handleRemoveFromCart}
+                            key={`${item.cake.title}_${item.cake.amount}`}
                         />
                     )
                 )

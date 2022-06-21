@@ -4,7 +4,7 @@ import IngredientFrom from "./Ingredient_form";
 
 function IngredientsEditor({ cakeIngredients, mode, handleIngredientsChange, getAndSetCurrentNumberOfIngredients }){
     const [amountOfIngredients, setAmountOfIngredients] = useState(() => {
-        if(mode == "edit"){
+        if(mode === "edit"){
             return cakeIngredients.map((ingredient) => 0);
         }
 
@@ -16,7 +16,7 @@ function IngredientsEditor({ cakeIngredients, mode, handleIngredientsChange, get
     }
 
     const handleRemoveIngredient = () => {
-        if(amountOfIngredients.length == 1) return;
+        if(amountOfIngredients.length === 1) return;
 
         const amount = [...amountOfIngredients];
         amount.length = amount.length - 1;
@@ -28,10 +28,10 @@ function IngredientsEditor({ cakeIngredients, mode, handleIngredientsChange, get
     return(
         <div className="ingredientsEditor">
             {
-                mode == "edit" ? 
+                mode === "edit" ? 
                 (
                     amountOfIngredients.map((item, index) => 
-                        <IngredientFrom ingredient={cakeIngredients[index]} orderNumber={index + 1} mode={mode} handleIngredientsChange={handleIngredientsChange} key={item.ingredientName + item.amountOfUnits} />
+                        <IngredientFrom ingredient={cakeIngredients[index]} orderNumber={index + 1} mode={mode} handleIngredientsChange={handleIngredientsChange} key={index} />
                     )
                 )
                 :
@@ -39,7 +39,7 @@ function IngredientsEditor({ cakeIngredients, mode, handleIngredientsChange, get
                     (
                         amountOfIngredients.map((item, index) => 
                            <>
-                                <IngredientFrom orderNumber={index + 1} mode={mode} handleIngredientsChange={handleIngredientsChange} key={item.ingredientName + item.amountOfUnits} />
+                                <IngredientFrom orderNumber={index + 1} mode={mode} handleIngredientsChange={handleIngredientsChange} key={index} />
                            </> 
                         )
                     )
@@ -54,7 +54,7 @@ function IngredientsEditor({ cakeIngredients, mode, handleIngredientsChange, get
 
                 onClickEventForRemove={() => {
                     handleRemoveIngredient()
-                    getAndSetCurrentNumberOfIngredients(amountOfIngredients.length != 1 ? amountOfIngredients.length - 1 : 1);
+                    getAndSetCurrentNumberOfIngredients(amountOfIngredients.length !== 1 ? amountOfIngredients.length - 1 : 1);
                 }}
             />
         </div>
