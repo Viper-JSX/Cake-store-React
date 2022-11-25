@@ -24,4 +24,5 @@ There are 4 tabs:
 * Redux thunk
 
 # How to run
-Open the app in your code editor and enter 'npn-start' and app will open in your default browser
+* Open the link: https://cake-store-by-viper-jsx.netlify.app
+* Open the app in your code editor and enter 'npn-start' and app will open in your default browser
