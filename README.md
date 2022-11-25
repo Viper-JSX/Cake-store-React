@@ -1,9 +1,9 @@
 # Cake Store
 
 # Table of contents: 
-*General info
-*Technologies
-*How to run
+* General info
+* Technologies
+* How to run
 
 # General info
 It's a shop where you can view and buy various cakes. New cakes can be created by an administrator in the Cake Editor. 
